@@ -6,7 +6,8 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - ACCOUNT_ID=728741135424
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 728741135424.dkr.ecr.us-east-2.amazonaws.com/demo-abi-ecr-repo
+      - REPOSITORY_URI=$ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/demo-abi-ecr-repo
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 728741135424.dkr.ecr.us-east-2.amazonaws.com
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
     commands:
